@@ -1,0 +1,21 @@
+create or replace trigger Nuevo_poke_mov
+after insert on pokemon then
+Declare
+v_id_pokemon pokemon.id_pokemon%type;
+v_id_tipo tipos.id_tipo%type;
+v_id_mov Mov.id_mov%type;
+
+cursor c_movi_poke is
+	select id_mov
+	from Mov
+	where id_tipo = v_id_tipo;
+Begin 
+	v_id_pokemon := :NEW.id_pokemon;
+	v_id_tipo := :New.id_tipo;
+	LOOP
+		Fetch c_movi_poke into v_id_mov;
+		exit when C_movi_poke%NOTFOUND;
+		insert into poke_mov values (v_id_pokemon, v_id_mov);
+	END LOOP;
+END;
+/
