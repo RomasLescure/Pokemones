@@ -1,3 +1,5 @@
+HOLA ROMAS
+
 create table Pokemon (ID_pokemon number(5) NOT NULL Primary Key, Nombre_pok Varchar2(20) NOT NULL, Altura number(5, 2) Not NULL, Peso number(5, 2) Not NULL);
 
 Create table Estadisticas (ID_pokemon pokemon.ID_pokemon%Type Not NULL, Ataque number(10) Not NULL, defensa number(10) Not NULL, ataque_esp number(10) Not NULL, defensa_esp number(10) Not NULL, vida number(10) Not NULL, velocidad number(10) Not NULL);
