@@ -1,4 +1,3 @@
-HOLA ROMAS
 
 create table Pokemon (ID_pokemon number(5) NOT NULL Primary Key, Nombre_pok Varchar2(20) NOT NULL, Altura number(5, 2) Not NULL, Peso number(5, 2) Not NULL);
 
@@ -7,10 +6,6 @@ Create table Estadisticas (ID_pokemon pokemon.ID_pokemon%Type Not NULL, Ataque n
 Create table tipos (ID_tipo number(10) Primary Key NOT NULL, Nombre_tipo varchar2(20) NOT NULL);
 
 Create table Poke_Tipo (ID_pokemon pokemon.ID_POKEMON%Type NOT NULL, ID_tipo tipos.ID_tipo%type Not Null);
-
-Create table habilidades (ID_habilidad Number(5) Primary Key Not NULL, nombre_hab varchar2(20) Not Null, descripcion varchar2(300) Not Null);
-
-Create table Poke_hab (ID_pokemon pokemon.ID_POKEMON%Type NOT NULL, Id_habilidad habilidades.ID_habilidad%type);
 
 Create table Forma_Evo (Id_forma_evo Number(5) Primary Key NOT NULL, Nombre varchar2(20) NOT NULL);
 
