@@ -1,11 +1,11 @@
-TABLAS
+TABLAS POKEMON
 
 
 CREATE TABLE pokedex (
 id_pokemon number(5) NOT NULL PRIMARY KEY,
 nombre varchar2(20) NOT NULL,
-peso number(5, 2) Not NULL,
-altura number(5, 2) Not NULL
+altura number(5, 2) Not NULL,
+peso number(5, 2) Not NULL
 );
 
 CREATE TABLE estadisticas
@@ -16,11 +16,7 @@ ataque_esp number(10) Not NULL,
 defensa_esp number(10) Not NULL,
 vida number(10) Not NULL,
 velocidad number(10) Not NULL,
-<<<<<<< Updated upstream
 beststat varchar2(20) NULL,
-=======
-beststat VARCHAR2(18),
->>>>>>> Stashed changes
 CONSTRAINT FK_id_pokemon FOREIGN KEY (id_pokemon)
 REFERENCES pokedex(id_pokemon)
 );
