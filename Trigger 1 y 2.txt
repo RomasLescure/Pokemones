@@ -1,0 +1,47 @@
+/*Trigger 1 */
+
+Create or replace trigger nuevo_pok
+after insert on tipo_poke
+Declare
+v_mov movimientos.id_mov%type;
+v_contador number(5);
+v_contando number(5) := 1;
+cursor c_mov_tipo is
+	select id_mov from movimientos
+	where id_tipo = :New.id_tipo;
+begin
+	open c_mov_tipo;
+	select cont(id_mov) into  v_contador
+	from movimientos where id_tipo = v_tipo;
+	for v_contando in v_contador LOOP
+		fetch c_mov_tipo into v_mov;
+		insert into movimientos_poke values (:NEW.id_pokemon, v_mov);
+	END LOOP;
+	close c_mov_tipo;
+END;
+
+/* Trigger 2 */
+
+Create or replace trigger nuevo_mov
+after insert on movimientos
+Declare
+v_id_pokemon tipo_poke.id_pokemon%type;
+v_contador number(5);
+v_contando number(5) := 1;
+cursor c_sea_poke is
+	select id_pokemon from tipo_poke
+	where id_tipo = :New.id_tipo;
+Begin
+	open c_sea_poke;
+	select cont(id_pokemon) into v_contador
+	from tipo_poke
+	where id_tipo = :New.id_tipo;
+	for v_contando in v_contador LOOP
+		fetch c_sea_poke into v_id_pokemon;
+		insert into movimientos_poke values (:New.id_mov, v_id_pokemon);
+	End LOOP;
+END;
+
+
+		
+	
