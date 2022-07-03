@@ -21,7 +21,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
         v_sum number(6);
         e_Mayor exception;
     BEGIN
-		v_sum := p_ataque + p_defensa + p_ata_esp + p_def_esp + p_vida + p_vel;
+		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
 		if v_sum > 680 then
 			raise e_mayor;
 		end if;
@@ -65,7 +65,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
     v_sum number(6);
     e_Mayor exception;
     BEGIN
-		v_sum := p_ataque + p_defensa + p_ata_esp + p_def_esp + p_vida + p_vel;
+		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
 		if(v_sum > 680)then
 			raise e_mayor;
 		end if;
@@ -112,7 +112,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
     v_sum number(6);
     e_Mayor exception;
     BEGIN
-		v_sum := p_ataque + p_defensa + p_ata_esp + p_def_esp + p_vida + p_vel;
+		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
         if(v_sum > 680)then
 			raise e_mayor;
 		end if;
@@ -159,7 +159,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
     v_sum number(6);
     e_Mayor exception;
     BEGIN
-		v_sum := p_ataque + p_defensa + p_ata_esp + p_def_esp + p_vida + p_vel;
+		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
 		if(v_sum > 680)then
 			raise e_mayor;
 		end if;
