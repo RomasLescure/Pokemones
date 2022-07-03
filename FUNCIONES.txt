@@ -9,7 +9,7 @@ p_vida in estadisticas.vida%type,
 p_velocidad in estadisticas.velocidad%type
 )
 RETURN varchar2 IS
-v_beststat estadisticas.beststat%type;
+   v_beststat estadisticas.beststat%type;
 BEGIN    
 v_beststat := GREATEST(p_ataque, p_defensa, p_ataque_esp, p_defensa_esp, p_vida, p_velocidad);
 
@@ -33,7 +33,7 @@ IF v_beststat = p_ataque THEN
 END IF;
 RETURN v_beststat;
 END best_stat;
-
+/
 
 
 
