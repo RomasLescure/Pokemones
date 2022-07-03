@@ -2,12 +2,12 @@
 --INGRESAR TIPO DE POKEMONES
 -----------------------------------------------------------------------------------------
 BEGIN 
-    Into_Poke_Tipo ('Siniestro');
-    Into_Poke_Tipo ('Fuego');
-    Into_Poke_Tipo ('Lucha');
-    Into_Poke_Tipo ('Acero');
-    Into_Poke_Tipo ('Hada');
-    Into_Poke_Tipo ('Acero');
+    Into_Tipo ('Siniestro');
+    Into_Tipo ('Fuego');
+    Into_Tipo ('Lucha');
+    Into_Tipo ('Acero');
+    Into_Tipo ('Hada');
+    Into_Tipo ('Acero');
 END;
 /
 
