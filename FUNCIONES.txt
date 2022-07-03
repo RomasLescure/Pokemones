@@ -1,0 +1,94 @@
+FUNCIONES POKEMON
+
+== cual es la moda de la statistics hay que sacar una variable
+que tenga el nombre de la mayor
+
+CREATE OR REPLACE FUNCTION max_stats (
+p_ataque in estadisticas.ataque%type,
+p_defensa in estadisticas.defensa%type,
+p_ataque_esp in estadisticas.ataque_esp%type,
+p_defensa_esp in estadisticas.defensa_esp%type,
+p_vida in estadisticas.vida%type,
+p_velocidad in estadisticas.velocidad%type,
+)
+RETURN estadisticas.beststats%type;
+IS
+v_beststats estadisticas.beststats%type;
+BEGIN
+if (ataque > defensa) THEN
+    if (ataque > ataque_especial) THEN
+	if(ataque>defensa_esp) THEN
+		if(ataque>vida) THEN
+			if(ataque>velocidad) THEN
+				ataque = v_beststats;
+elsif(defensa > ataque) THEN
+	if(defensa>defensa_esp) THEN
+		if(defensa>vida) THEN
+			if(defensa>velocidad) THEN
+				defensa = v_beststats;
+elsif(ataque_esp > ataque) THEN
+	if(ataque_esp>defensa) THEN
+		if(defensa>vida) THEN
+			if(defensa>vida) THEN
+				if(defensa>velocidad) THEN
+					defensa = v_beststats;
+elsif(defensa_esp > ataque) THEN
+	if(defensa_esp>defensa) THEN
+		if(defensa_esp>vida) THEN
+			if(defensa_esp>vida) THEN
+				if(defensa>velocidad) THEN
+					defensa = v_beststats;
+
+}
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION best_stat(
+p_id_pokemon in estadisticas.id_pokemon%type,
+p_ataque in estadisticas.ataque%type,
+p_defensa in estadisticas.defensa%type,
+p_ataque_esp in estadisticas.ataque_esp%type,
+p_defensa_esp in estadisticas.defensa_esp%type,
+p_vida in estadisticas.vida%type,
+p_velocidad in estadisticas.velocidad%type
+)
+RETURN varchar2 IS
+v_beststat estadisticas.beststat%type;
+BEGIN    
+SELECT GREATEST(ataque, defensa, ataque_esp,defensa_esp,vida, velocidad) INTO v_beststat FROM estadisticas;
+ RETURN v_beststat;
+ END best_stat;
+
+
+
+==FUNCION SUMATORIA
+DECLARE
+V_SUMATORA
+IF V SUMATORIA ES MAYOR QUE 680
+THEN RAISE ERROR
+
+CREATE OR REPLACE FUNCTION sumatoria_mov (
+p_ataque in estadisticas.ataque%type,
+p_defensa in estadisticas.defensa%type,
+p_ataque_esp in estadisticas.ataque_esp%type,
+p_defensa_esp in estadisticas.defensa_esp%type,
+p_vida in estadisticas.vida%type,
+p_velocidad in estadisticas.velocidad%type,
+p_b=
+)
+RETURN estadisticas.beststat%type;
+IS
+BEGIN
+v_sumatoria_stats = (p_ataque + p_defensa + p_ataque_esp + p_defensa_esp + p_vida + p_velocidad);
+IF v_sumatoria_stats > 680 THEN
+RAISE e_invalid_stats;
+END IF; ----- ROLLBACK;
+EXCEPTION
+WHEN e_invalid_stats THEN
+DBMS_OUTPUT.PUT_LINE ('ESTADISTICAS ERRONEAS, POKEMON INEXISTENTE');
+END sumatoria_mov;
+/

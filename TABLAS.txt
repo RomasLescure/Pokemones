@@ -64,4 +64,3 @@ id_formaevo number(5) NOT NULL,
 CONSTRAINT FK_id_formaevo FOREIGN KEY (id_formaevo)
 REFERENCES forma_evolucion(id_formaevo)
 );
-
