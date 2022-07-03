@@ -47,7 +47,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo1_SE(
 -----------------------------------------------------------------------
 --Procedimiento 2
 -----------------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE Intro_Poke_tipo1_SE(
+CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
 	p_nombre in pokedex.nombre%type,
 	p_peso in pokedex.peso%type,
 	p_altura in pokedex.altura%type,
@@ -92,7 +92,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo1_SE(
 -----------------------------------------------------------------------
 --Procedimiento 3
 -----------------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
+CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
 	p_nombre in pokedex.nombre%type,
 	p_peso in pokedex.peso%type,
 	p_altura in pokedex.altura%type,
@@ -138,7 +138,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
 -----------------------------------------------------------------------
 --Procedimiento 4
 -----------------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
+CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
 	p_nombre in pokedex.nombre%type,
 	p_peso in pokedex.peso%type,
 	p_altura in pokedex.altura%type,
@@ -192,13 +192,14 @@ CREATE OR REPLACE SEQUENCE id_nuevoMov
 
 CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
 	p_nombre in movimientos.nombre_mov%type,
+    p_idtipo in movimientos.id_tipo%type,
     p_poder in movimientos.poder%type,
     p_ppt in movimientos.power_point%type,
     p_presicion in movimientos.presicion%type,
 ) IS
     BEGIN
         INSERT INTO movimientos
-            VALUES (id_nuevoMov.nextval, p_nombre, p_poder, p_ppt, p_presicion);
+            VALUES (id_nuevoMov.nextval, p_idtipo, p_nombre, p_poder, p_ppt, p_presicion);
     EXCEPTION
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
@@ -213,11 +214,11 @@ CREATE OR REPLACE SEQUENCE id_nuevoPoke
 	START WITH 1 
 	INCREMENT BY 1;
 
-CREATE OR REPLACE PROCEDURE Into_Poke_Tipo(
+CREATE OR REPLACE PROCEDURE Into_Tipo(
 	p_nombre in tipo.nombre_tipo%type
 ) IS
     BEGIN
-        INSERT INTO tipo_poke
+        INSERT INTO tipo
             VALUES (id_nuevoPoke.nextval, p_nombre);
     EXCEPTION
         WHEN dup_val_on_index THEN
@@ -233,7 +234,7 @@ CREATE OR REPLACE SEQUENCE id_Evolucion
 	START WITH 1 
 	INCREMENT BY 1;
 
-CREATE OR REPLACE PROCEDURE Into_Evoluacion(
+CREATE OR REPLACE PROCEDURE Into_Forma_Evo(
 	p_descripcion in forma_evolucion.nombre%type
 ) IS
     BEGIN

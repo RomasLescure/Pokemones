@@ -2,8 +2,8 @@
 CREATE TABLE pokedex (
 id_pokemon number(5) NOT NULL PRIMARY KEY,
 nombre varchar2(20) NOT NULL,
-altura number(5, 2) Not NULL,
-peso number(5, 2) Not NULL
+peso number(5, 2) Not NULL,
+altura number(5, 2) Not NULL
 );
 
 CREATE TABLE estadisticas
@@ -35,11 +35,11 @@ REFERENCES tipo(id_tipo)
 
 CREATE TABLE movimientos(
 id_mov number(5) PRIMARY KEY NOT NULL,
+id_tipo number(2),
 nombre_mov varchar2(25) NOT NULL,
 poder number(3),
 powerpoints number(3),
 precision number(3),
-id_tipo number(2),
 CONSTRAINT FK2_id_tipo FOREIGN KEY (id_tipo)
 REFERENCES tipo(id_tipo)
 );
