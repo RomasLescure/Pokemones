@@ -17,7 +17,8 @@ begin
 	where id_tipo = :New.id_tipo;
 	for v_contando in 1..v_contador LOOP
 		fetch c_mov_tipo into v_mov;
-		insert into movimientos_poke values (:NEW.id_pokemon, v_mov);
+		insert into movimientos_poke 
+		values (:NEW.id_pokemon, v_mov);
 	END LOOP;
 	close c_mov_tipo;
 END;
@@ -41,7 +42,8 @@ Begin
 	where id_tipo = :New.id_tipo;
 	for v_contando in 1..v_contador LOOP
 		fetch c_sea_poke into v_id_pokemon;
-		insert into movimientos_poke values (:New.id_mov, v_id_pokemon);
+		insert into movimientos_poke 
+		values (:New.id_mov, v_id_pokemon);
 	End LOOP;
 END;
 /

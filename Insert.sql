@@ -41,7 +41,8 @@ END;
 --INGRESAR POKEMONES
 -----------------------------------------------------------------------------------------
 BEGIN 
-    Intro_Poke_tipo1_SE ('Zorua', '50', '1.00', 1, 60, 90, 75, 40, 100, 95);
+    --Intro_Poke_tipo1_SE ('Zorua', '50', '1.00', 1, 60, 90, 75, 40, 100, 95);
+    Intro_Poke_tipo1_SE ('Alcrimie', '63', '0.95', 5, 70, 85, 66, 47, 60, 80);
 END;
 /
 
@@ -53,7 +54,11 @@ END;
 /
 
 BEGIN
-    Into_Poke_Evo ('Zoroark', '150', '1.95', 1, 68, 94, 85, 42, 100, 150, 1, 1);
-    Into_Poke_Evo ('Alcrimie', '63', '0.95', 5, 70, 85, 66, 47, 60, 80, 2, 2);
+    Into_Poke_Evo1 ('Zoroark', '150', '1.95', 1, 68, 94, 85, 42, 100, 150, 1, 1);
 END;
 /
+
+CREATE OR REPLACE VIEW POKE_MOVIMIENTO AS    
+    SELECT p.nombre, m.nombre_mov 
+    FROM movimientos m, pokedex p, movimientos_poke mp
+    WHERE (p.id_pokemon = mp.id_pokemon) AND (mp.id_mov = m.id_mov);
