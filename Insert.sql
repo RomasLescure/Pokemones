@@ -11,16 +11,28 @@ BEGIN
 END;
 /
 
+
 -----------------------------------------------------------------------------------------
 --INGRESAR MOVIMIENTO
 -----------------------------------------------------------------------------------------
 BEGIN 
-    Into_Poke_Tipo ('Ladron', 1, );
-    Into_Poke_Tipo ('Fuego');
-    Into_Poke_Tipo ('Lucha');
-    Into_Poke_Tipo ('Acero');
-    Into_Poke_Tipo ('Hada');
-    Into_Poke_Tipo ('Acero');
+    Into_Poke_Mov ('Ladron', 1, 60, 15, 100);
+    Into_Poke_Mov ('Lanzallamas', 2, 80, 5, 95);
+    Into_Poke_Mov ('Patada baja', 3, 0, 15, 100);
+    Into_Poke_Mov ('Golpe meteoro', 4, 90, 10, 100);
+    Into_Poke_Mov ('Defensa métalica', 4, 0, 20, 100);
+    Into_Poke_Mov ('Dulce beso', 5, 0, 10, 75);
+    Into_Poke_Mov ('Explosión mística', 5, 100, 5, 100);
+END;
+/
+
+
+-----------------------------------------------------------------------------------------
+--INGRESAR FORMA EVOLUCIÓN
+-----------------------------------------------------------------------------------------
+BEGIN 
+    Into_Forma_Evo('Ir a un lugar específico');
+    Into_Forma_Evo('Dar vueltas');
 END;
 /
 
