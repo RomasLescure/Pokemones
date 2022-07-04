@@ -99,6 +99,10 @@ CREATE OR REPLACE FUNCTION best_stat(
             v_beststat := 'Velocidad';
         END IF;
         RETURN v_beststat;
+    EXCEPTION
+        WHEN others THEN
+            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+    END;
     END best_stat;
 /
 
@@ -166,6 +170,8 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
     END;
 /
 
+COMMIT;
+
 -----------------------------------------------------------------------
 --Procedimiento 2
 -----------------------------------------------------------------------
@@ -204,6 +210,8 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
             DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
+
+COMMIT;
 
 -----------------------------------------------------------------------
 --Procedimiento 3
@@ -244,6 +252,8 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
             DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
+
+COMMIT;
 
 -----------------------------------------------------------------------
 --Procedimiento 4
@@ -288,6 +298,8 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
     END;
 /
 
+COMMIT;
+
 -----------------------------------------------------------------------
 --Procedimiento 5
 -----------------------------------------------------------------------
@@ -313,10 +325,12 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
     END;
 /
 
+COMMIT;
+
 -----------------------------------------------------------------------
 --Procedimiento 6
 -----------------------------------------------------------------------
-CREATE SEQUENCE id_nuevoPoke
+CREATE SEQUENCE id_NuevoTipo
 	START WITH 1 
 	INCREMENT BY 1;
 
@@ -325,7 +339,7 @@ CREATE OR REPLACE PROCEDURE Into_Tipo(
     ) IS
     BEGIN
         INSERT INTO tipo
-            VALUES (id_nuevoPoke.nextval, p_nombre);
+            VALUES (id_NuevoTipo.nextval, p_nombre);
     EXCEPTION
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
@@ -333,6 +347,8 @@ CREATE OR REPLACE PROCEDURE Into_Tipo(
             DBMS_OUTPUT.PUT_LINE('Error desconocido');
     END;
 /
+
+COMMIT;
 
 -----------------------------------------------------------------------
 --Procedimiento 7
@@ -354,6 +370,8 @@ CREATE OR REPLACE PROCEDURE Into_Forma_Evo(
             DBMS_OUTPUT.PUT_LINE('Error desconocido');
     END;
 /
+
+COMMIT;
 
 -----------------------------------------------------------------------
 --Trigger
@@ -380,8 +398,15 @@ CREATE OR REPLACE TRIGGER nuevo_pok
             values (:NEW.id_pokemon, v_mov);
         END LOOP;
         CLOSE c_mov_tipo;
+    EXCEPTION
+        WHEN dup_val_on_index THEN
+            DBMS_OUTPUT.PUT_LINE('Valores duplicados');
+        WHEN others THEN
+            DBMS_OUTPUT.PUT_LINE('Error desconocido');
     END;
 /
+
+COMMIT;
 
 CREATE OR REPLACE TRIGGER nuevo_mov
 AFTER INSERT ON movimiento FOR EACH ROW
@@ -403,8 +428,15 @@ AFTER INSERT ON movimiento FOR EACH ROW
             values (:NEW.id_mov, v_id_pokemon);
         END LOOP;
         CLOSE c_sea_poke;
+    EXCEPTION
+        WHEN dup_val_on_index THEN
+            DBMS_OUTPUT.PUT_LINE('Valores duplicados');
+        WHEN others THEN
+            DBMS_OUTPUT.PUT_LINE('Error desconocido');
     END;
 /
+
+COMMIT;
 
 -----------------------------------------------------------------------
 --INGRESAR TIPO DE POKEMONES
@@ -416,7 +448,6 @@ BEGIN
     Into_Tipo ('Lucha');
     Into_Tipo ('Acero');
     Into_Tipo ('Hada');
-    Into_Tipo ('Acero');
 END;
 /
 
