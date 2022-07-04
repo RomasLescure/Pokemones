@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------
 CREATE SEQUENCE id_pokemon
 	START WITH 1 
-	increment by 1;
+	INCREMENT BY 1;
 
 CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
 	p_nombre in pokedex.nombre%type,
@@ -15,18 +15,13 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
 	p_ata_esp in estadisticas.ataque_esp%type,
 	p_def_esp in estadisticas.defensa_esp%type,
 	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type) is
+	p_vel in estadisticas.velocidad%type) IS
         v_next pokedex.id_pokemon%type;
         v_best estadisticas.beststat%type;
         v_sum number(6);
-        e_Mayor exception;
     BEGIN
-		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-		if v_sum > 680 then
-			raise e_mayor;
-		end if;
+		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
         v_next := id_pokemon.nextval;
-        
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
         v_best := best_stat(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
@@ -36,8 +31,6 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
         INSERT INTO tipo_poke 
             VALUES (v_next, p_tipo);
     EXCEPTION
-        When e_mayor then
-			DBMS_OUTPUT.PUT_LINE('Las estadisticas no pueden ser mayor de 680');
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
@@ -59,16 +52,12 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
 	p_ata_esp in estadisticas.ataque_esp%type,
 	p_def_esp in estadisticas.defensa_esp%type,
 	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type) is
+	p_vel in estadisticas.velocidad%type) IS
 	v_next pokedex.id_pokemon%type;
     v_best estadisticas.beststat%type;
     v_sum number(6);
-    e_Mayor exception;
     BEGIN
-		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-		if(v_sum > 680)then
-			raise e_mayor;
-		end if;
+		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
         v_next := id_pokemon.nextval;
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
@@ -80,10 +69,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
             VALUES (v_next, p_tipo);
         INSERT INTO tipo_poke 
             VALUES (v_next, p_tipo2);
-        
     EXCEPTION
-        When e_mayor then
-			DBMS_OUTPUT.PUT_LINE('Las estadisticas no pueden ser mayor de 680');
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
@@ -109,13 +95,9 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
     p_idforma in evolucion_poke.id_formaevo%type) IS
 	v_next pokedex.id_pokemon%type;
     v_best estadisticas.beststat%type;
-    v_sum number(6);
-    e_Mayor exception;
+    v_sum number(6);    
     BEGIN
-		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-        if(v_sum > 680)then
-			raise e_mayor;
-		end if;
+		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
         v_next := id_pokemon.nextval;
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
@@ -128,8 +110,6 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
         INSERT INTO evolucion_poke
             VALUES (v_next, p_idpokeant, p_idforma);
     EXCEPTION
-        When e_mayor then
-			DBMS_OUTPUT.PUT_LINE('Las estadisticas no pueden ser mayor de 680');
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
@@ -156,13 +136,9 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
     p_idforma in evolucion_poke.id_formaevo%type) IS
 	v_next pokedex.id_pokemon%type;
     v_best estadisticas.beststat%type;
-    v_sum number(6);
-    e_Mayor exception;
+    v_sum number(6);    
     BEGIN
-		v_sum := sumatoria_mov (p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-		if(v_sum > 680)then
-			raise e_mayor;
-		end if;
+		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
         v_next := id_pokemon.nextval;
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
@@ -177,8 +153,6 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
         INSERT INTO evolucion_poke
             VALUES (v_next, p_idpokeant, p_idforma);
     EXCEPTION
-        When e_mayor then
-			DBMS_OUTPUT.PUT_LINE('Las estadisticas no pueden ser mayor de 680');
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
@@ -199,7 +173,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
     p_poder in movimientos.poder%type,
     p_ppt in movimientos.powerpoints%type,
     p_presicion in movimientos.precision%type
-) IS
+    ) IS
     BEGIN
         INSERT INTO movimientos (id_mov, nombre_mov, id_tipo, poder, powerpoints, precision)
             VALUES (id_nuevoMov.nextval, p_nombre, p_idtipo, p_poder, p_ppt, p_presicion);
@@ -220,7 +194,7 @@ CREATE SEQUENCE id_nuevoPoke
 
 CREATE OR REPLACE PROCEDURE Into_Tipo(
 	p_nombre in tipo.nombre_tipo%type
-) IS
+    ) IS
     BEGIN
         INSERT INTO tipo
             VALUES (id_nuevoPoke.nextval, p_nombre);
@@ -241,7 +215,7 @@ CREATE SEQUENCE id_Evolucion
 
 CREATE OR REPLACE PROCEDURE Into_Forma_Evo(
 	p_descripcion in forma_evolucion.descripcion%type
-) IS
+    ) IS
     BEGIN
         INSERT INTO FORMA_EVOLUCION
             VALUES (id_Evolucion.nextval, p_descripcion);
