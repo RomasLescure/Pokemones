@@ -50,6 +50,6 @@ CREATE OR REPLACE FUNCTION sumatoria_mov(
         END IF;
     EXCEPTION
         WHEN e_invalid_stats THEN
-          DBMS_OUTPUT.PUT_LINE ('El Pokémon no se ingreso a la base de datos: estadistica ERRONEAS, POKEMON INEXISTENTE');
+          DBMS_OUTPUT.PUT_LINE ('La suma de las estadistica no debe ser mayor a 680');
     END sumatoria_mov;
 /
