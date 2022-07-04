@@ -46,11 +46,11 @@ CREATE TABLE movimiento (
     REFERENCES tipo(id_tipo)
     );
 
-CREATE TABLE movimientos_poke (
+CREATE TABLE movimiento_poke (
     id_pokemon number(5) NOT NULL,
     id_mov number(5) NOT NULL,
     CONSTRAINT FK_id_mov FOREIGN KEY (id_mov)
-    REFERENCES movimientos(id_mov),
+    REFERENCES movimiento(id_mov),
     CONSTRAINT fk3_id_pokemon FOREIGN KEY (id_pokemon)
     REFERENCES pokedex(id_pokemon)
     );
