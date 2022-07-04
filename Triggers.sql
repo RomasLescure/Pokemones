@@ -5,18 +5,18 @@
 CREATE OR REPLACE TRIGGER nuevo_pok 
     AFTER INSERT ON tipo_poke FOR EACH ROW
     DECLARE
-        v_mov movimientos.id_mov%type;
+        v_mov movimiento.id_mov%type;
         v_contador number(5);
         v_contando number(5) := 1;
         CURSOR c_mov_tipo is
             SELECT id_mov 
-                FROM movimientos
+                FROM movimiento
                 WHERE id_tipo = :NEW.id_tipo;
     begin
         OPEN c_mov_tipo;
         SELECT count(id_mov) 
             INTO v_contador
-            FROM movimientos 
+            FROM movimiento 
             WHERE id_tipo = :NEW.id_tipo;
         FOR v_contando IN 1..v_contador LOOP
             FETCH c_mov_tipo INTO v_mov;
@@ -29,7 +29,7 @@ CREATE OR REPLACE TRIGGER nuevo_pok
 
 
 CREATE OR REPLACE TRIGGER nuevo_mov
-AFTER INSERT ON movimientos FOR EACH ROW
+AFTER INSERT ON movimiento FOR EACH ROW
     DECLARE
     v_id_pokemon tipo_poke.id_pokemon%type;
     v_contador number(5);

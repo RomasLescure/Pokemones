@@ -10,14 +10,14 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
 	p_peso in pokedex.peso%type,
 	p_altura in pokedex.altura%type,
 	p_tipo in tipo.nombre_tipo%type,
-	p_ataque in estadisticas.ataque%type,
-	p_defensa in estadisticas.defensa%type,
-	p_ata_esp in estadisticas.ataque_esp%type,
-	p_def_esp in estadisticas.defensa_esp%type,
-	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type) IS
+	p_ataque in estadistica.ataque%type,
+	p_defensa in estadistica.defensa%type,
+	p_ata_esp in estadistica.ataque_esp%type,
+	p_def_esp in estadistica.defensa_esp%type,
+	p_vida in estadistica.vida%type,
+	p_vel in estadistica.velocidad%type) IS
         v_next pokedex.id_pokemon%type;
-        v_best estadisticas.beststat%type;
+        v_best estadistica.beststat%type;
         v_sum number(6);
     BEGIN
 		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
@@ -25,7 +25,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
         v_best := best_stat(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-        INSERT INTO estadisticas 
+        INSERT INTO estadistica 
             VALUES (v_next, p_ataque, p_defensa, p_ata_esp, p_def_esp,
         p_vida, p_vel, v_best);
         INSERT INTO tipo_poke 
@@ -47,14 +47,14 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
 	p_altura in pokedex.altura%type,
 	p_tipo in tipo.id_tipo%type,
 	p_tipo2 in tipo.id_tipo%type,
-	p_ataque in estadisticas.ataque%type,
-	p_defensa in estadisticas.defensa%type,
-	p_ata_esp in estadisticas.ataque_esp%type,
-	p_def_esp in estadisticas.defensa_esp%type,
-	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type) IS
+	p_ataque in estadistica.ataque%type,
+	p_defensa in estadistica.defensa%type,
+	p_ata_esp in estadistica.ataque_esp%type,
+	p_def_esp in estadistica.defensa_esp%type,
+	p_vida in estadistica.vida%type,
+	p_vel in estadistica.velocidad%type) IS
 	v_next pokedex.id_pokemon%type;
-    v_best estadisticas.beststat%type;
+    v_best estadistica.beststat%type;
     v_sum number(6);
     BEGIN
 		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
@@ -62,7 +62,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
         v_best := best_stat(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-        INSERT INTO estadisticas 
+        INSERT INTO estadistica 
             VALUES (v_next, p_ataque, p_defensa, p_ata_esp, p_def_esp,
         p_vida, p_vel, v_best);
         INSERT INTO tipo_poke 
@@ -85,16 +85,16 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
 	p_peso in pokedex.peso%type,
 	p_altura in pokedex.altura%type,
 	p_tipo in tipo.nombre_tipo%type,
-	p_ataque in estadisticas.ataque%type,
-	p_defensa in estadisticas.defensa%type,
-	p_ata_esp in estadisticas.ataque_esp%type,
-	p_def_esp in estadisticas.defensa_esp%type,
-	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type,
+	p_ataque in estadistica.ataque%type,
+	p_defensa in estadistica.defensa%type,
+	p_ata_esp in estadistica.ataque_esp%type,
+	p_def_esp in estadistica.defensa_esp%type,
+	p_vida in estadistica.vida%type,
+	p_vel in estadistica.velocidad%type,
     p_idpokeant in evolucion_poke.id_pokemonant%type,
     p_idforma in evolucion_poke.id_formaevo%type) IS
 	v_next pokedex.id_pokemon%type;
-    v_best estadisticas.beststat%type;
+    v_best estadistica.beststat%type;
     v_sum number(6);    
     BEGIN
 		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
@@ -102,7 +102,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
 		v_best := best_stat(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-        INSERT INTO estadisticas 
+        INSERT INTO estadistica 
             VALUES (v_next, p_ataque, p_defensa, p_ata_esp, p_def_esp,
         p_vida, p_vel, v_best);
         INSERT INTO tipo_poke 
@@ -126,16 +126,16 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
 	p_altura in pokedex.altura%type,
 	p_tipo in tipo.nombre_tipo%type,
     p_tipo2 in tipo.nombre_tipo%type,
-	p_ataque in estadisticas.ataque%type,
-	p_defensa in estadisticas.defensa%type,
-	p_ata_esp in estadisticas.ataque_esp%type,
-	p_def_esp in estadisticas.defensa_esp%type,
-	p_vida in estadisticas.vida%type,
-	p_vel in estadisticas.velocidad%type,
+	p_ataque in estadistica.ataque%type,
+	p_defensa in estadistica.defensa%type,
+	p_ata_esp in estadistica.ataque_esp%type,
+	p_def_esp in estadistica.defensa_esp%type,
+	p_vida in estadistica.vida%type,
+	p_vel in estadistica.velocidad%type,
     p_idpokeant in evolucion_poke.id_pokemonant%type,
     p_idforma in evolucion_poke.id_formaevo%type) IS
 	v_next pokedex.id_pokemon%type;
-    v_best estadisticas.beststat%type;
+    v_best estadistica.beststat%type;
     v_sum number(6);    
     BEGIN
 		v_sum := sumatoria_mov(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
@@ -143,7 +143,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
         INSERT INTO pokedex 
             VALUES (v_next, p_nombre, p_peso, p_altura);
         v_best := best_stat(p_ataque, p_defensa, p_ata_esp, p_def_esp, p_vida, p_vel);
-        INSERT INTO estadisticas 
+        INSERT INTO estadistica 
             VALUES (v_next, p_ataque, p_defensa, p_ata_esp, p_def_esp,
         p_vida, p_vel, v_best);
         INSERT INTO tipo_poke 
@@ -168,14 +168,14 @@ CREATE SEQUENCE id_nuevoMov
 	INCREMENT BY 1;
 
 CREATE OR REPLACE PROCEDURE Into_Poke_Mov(
-	p_nombre in movimientos.nombre_mov%type,
-    p_idtipo in movimientos.id_tipo%type,
-    p_poder in movimientos.poder%type,
-    p_ppt in movimientos.powerpoints%type,
-    p_presicion in movimientos.precision%type
+	p_nombre in movimiento.nombre_mov%type,
+    p_idtipo in movimiento.id_tipo%type,
+    p_poder in movimiento.poder%type,
+    p_ppt in movimiento.powerpoints%type,
+    p_presicion in movimiento.precision%type
     ) IS
     BEGIN
-        INSERT INTO movimientos (id_mov, nombre_mov, id_tipo, poder, powerpoints, precision)
+        INSERT INTO movimiento (id_mov, nombre_mov, id_tipo, poder, powerpoints, precision)
             VALUES (id_nuevoMov.nextval, p_nombre, p_idtipo, p_poder, p_ppt, p_presicion);
     EXCEPTION
         WHEN dup_val_on_index THEN

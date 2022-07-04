@@ -8,7 +8,7 @@ CREATE TABLE pokedex (
     peso number(5, 2) Not NULL
     );
 
-CREATE TABLE estadisticas (
+CREATE TABLE estadistica (
     id_pokemon number(5) NOT NULL,
     ataque number(10) Not NULL,
     defensa number(10) Not NULL,
@@ -35,7 +35,7 @@ CREATE TABLE tipo_poke (
     REFERENCES tipo(id_tipo)
     );
 
-CREATE TABLE movimientos (
+CREATE TABLE movimiento (
     id_mov number(5) PRIMARY KEY NOT NULL,
     nombre_mov varchar2(25) NOT NULL,
     poder number(3),
