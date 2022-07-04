@@ -34,7 +34,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -73,7 +73,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -113,7 +113,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -156,7 +156,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
