@@ -122,7 +122,7 @@ CREATE OR REPLACE FUNCTION sumatoria_mov(
         END IF;
     EXCEPTION
         WHEN e_invalid_stats THEN
-          DBMS_OUTPUT.PUT_LINE ('El Pokémon no se ingreso a la base de datos: estadistica ERRONEAS, POKEMON INEXISTENTE');
+          DBMS_OUTPUT.PUT_LINE ('La suma de las estadistica no debe ser mayor a 680');
     END sumatoria_mov;
 /
 
@@ -162,7 +162,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_Tipo1_SE(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -201,7 +201,7 @@ CREATE OR REPLACE PROCEDURE Intro_Poke_tipo2_SE(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -241,7 +241,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo1(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -284,7 +284,7 @@ CREATE OR REPLACE PROCEDURE Into_Poke_Evo2(
         WHEN dup_val_on_index THEN
             DBMS_OUTPUT.PUT_LINE('Valores duplicados');
         WHEN others THEN
-            DBMS_OUTPUT.PUT_LINE('Error desconocido');
+            DBMS_OUTPUT.PUT_LINE('El Pokémon no se ingreso a la base de datos');
     END;
 /
 
@@ -409,6 +409,7 @@ AFTER INSERT ON movimiento FOR EACH ROW
 -----------------------------------------------------------------------
 --INGRESAR TIPO DE POKEMONES
 -----------------------------------------------------------------------
+SET SERVEROUTPUT ON
 BEGIN 
     Into_Tipo ('Siniestro');
     Into_Tipo ('Fuego');
@@ -462,3 +463,60 @@ BEGIN
     Into_Poke_Evo1 ('Zoroark', '150', '1.95', 1, 68, 94, 85, 42, 100, 150, 1, 1);
 END;
 /
+
+-----------------------------------------------------------------------
+--INGRESAR POKEMONES CON ERROR 
+-----------------------------------------------------------------------
+BEGIN
+    Intro_Poke_tipo1_SE ('Pancham', '20', '0.60', 3, 70, 85, 66, 47, 60, 680);
+END;
+/
+
+BEGIN
+    Into_Poke_Evo1 ('Alcrimie Gigamax', '200', '30', 1, 68, 94, 85, 42, 100, 650, 1, 1);
+END;
+/
+
+---------------------------------------------------------------------------------
+--Vistas
+---------------------------------------------------------------------------------
+CREATE OR REPLACE VIEW poke_movimiento AS    
+    SELECT p.nombre, m.nombre_mov 
+    FROM movimiento m, pokedex p, movimiento_poke mp
+    WHERE (p.id_pokemon = mp.id_pokemon) AND (mp.id_mov = m.id_mov);
+
+CREATE OR REPLACE VIEW pokemon_siniestro AS
+	SELECT p.id_pokemon, p.nombre, t.nombre_tipo, e.ataque, e.defensa, e.ataque_esp, e.defensa_esp, e.vida, e.velocidad
+	FROM pokedex p, tipo t, tipo_poke tp, estadistica e
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 1)
+            AND (p.id_pokemon = e.id_pokemon);
+
+CREATE OR REPLACE VIEW pokemon_fuego AS
+	SELECT p.id_pokemon, p.nombre, t.nombre_tipo, e.ataque, e.defensa, e.ataque_esp, e.defensa_esp, e.vida, e.velocidad
+	FROM pokedex p, tipo t, tipo_poke tp, estadistica e
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 2)
+            AND (p.id_pokemon = e.id_pokemon);
+
+CREATE OR REPLACE VIEW pokemon_lucha AS
+	SELECT p.id_pokemon, p.nombre, t.nombre_tipo, e.ataque, e.defensa, e.ataque_esp, e.defensa_esp, e.vida, e.velocidad
+	FROM pokedex p, tipo t, tipo_poke tp, estadistica e
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 3)
+            AND (p.id_pokemon = e.id_pokemon);
+
+CREATE OR REPLACE VIEW pokemon_acero AS
+	SELECT p.id_pokemon, p.nombre, t.nombre_tipo, e.ataque, e.defensa, e.ataque_esp, e.defensa_esp, e.vida, e.velocidad
+	FROM pokedex p, tipo t, tipo_poke tp, estadistica e
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 4)
+            AND (p.id_pokemon = e.id_pokemon);
+
+CREATE OR REPLACE VIEW pokemon_hada AS
+	SELECT p.id_pokemon, p.nombre, t.nombre_tipo, e.ataque, e.defensa, e.ataque_esp, e.defensa_esp, e.vida, e.velocidad
+	FROM pokedex p, tipo t, tipo_poke tp, estadistica e
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 5)
+            AND (p.id_pokemon = e.id_pokemon);
+
+CREATE OR REPLACE VIEW poke_tipo AS
+    SELECT p.id_pokemon, p.nombre, t.nombre_tipo
+    FROM pokedex p, tipo t, tipo_poke tp
+    WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo);
+

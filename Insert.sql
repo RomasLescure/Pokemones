@@ -56,10 +56,14 @@ END;
 /
 
 -----------------------------------------------------------------------
---INGRESAR CON ERROR POKEMONES
+--INGRESAR POKEMONES CON ERROR 
 -----------------------------------------------------------------------
-BEGIN 
-    Intro_Poke_tipo1_SE ('Zorua', '50', '1.00', 1, 60, 90, 75, 40, 100, 95);
-    Intro_Poke_tipo1_SE ('Alcrimie', '63', '0.95', 5, 70, 85, 66, 47, 60, 80);
+BEGIN
+    Intro_Poke_tipo1_SE ('Pancham', '20', '0.60', 3, 70, 85, 66, 47, 60, 680);
+END;
+/
+
+BEGIN
+    Into_Poke_Evo1 ('Alcrimie Gigamax', '200', '30', 1, 68, 94, 85, 42, 100, 650, 1, 1);
 END;
 /
