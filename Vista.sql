@@ -1,9 +1,9 @@
------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --Vistas
------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 CREATE OR REPLACE VIEW POKE_MOVIMIENTO AS    
     SELECT p.nombre, m.nombre_mov 
-    FROM movimiento m, pokedex p, movimientos_poke mp
+    FROM movimiento m, pokedex p, movimiento_poke mp
     WHERE (p.id_pokemon = mp.id_pokemon) AND (mp.id_mov = m.id_mov);
 
 CREATE OR REPLACE VIEW pokemon_siniestro AS

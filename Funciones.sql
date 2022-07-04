@@ -1,6 +1,6 @@
------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --Funciones
------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION best_stat(
     p_ataque in estadistica.ataque%type,
     p_defensa in estadistica.defensa%type,
@@ -45,6 +45,8 @@ CREATE OR REPLACE FUNCTION sumatoria_mov(
         v_sumatoria_stats := p_ataque + p_defensa + p_ataque_esp + p_defensa_esp + p_vida + p_velocidad;
         IF v_sumatoria_stats > 680 THEN
             RAISE e_invalid_stats;
+        ELSE
+            RETURN v_sumatoria_stats;
         END IF;
     EXCEPTION
         WHEN e_invalid_stats THEN
