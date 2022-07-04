@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------
 --Vistas
 ---------------------------------------------------------------------------------
-CREATE OR REPLACE VIEW POKE_MOVIMIENTO AS    
+CREATE OR REPLACE VIEW poke_movimiento AS    
     SELECT p.nombre, m.nombre_mov 
     FROM movimiento m, pokedex p, movimiento_poke mp
     WHERE (p.id_pokemon = mp.id_pokemon) AND (mp.id_mov = m.id_mov);
@@ -36,7 +36,7 @@ CREATE OR REPLACE VIEW pokemon_hada AS
     WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 5)
             AND (p.id_pokemon = e.id_pokemon);
 
-CREATE OR REPLACE VIEW POKE_TIPOS AS
+CREATE OR REPLACE VIEW poke_tipo AS
     SELECT p.id_pokemon, p.nombre, t.nombre_tipo
     FROM pokedex p, tipo t, tipo_poke tp
     WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo);
