@@ -36,7 +36,6 @@ CREATE OR REPLACE VIEW pokemon_hada AS
     WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo) AND (t.id_tipo = 5)
             AND (p.id_pokemon = e.id_pokemon);
 
-
 CREATE OR REPLACE VIEW POKE_TIPOS AS
     SELECT p.id_pokemon, p.nombre, t.nombre_tipo
     FROM pokedex p, tipo t, tipo_poke tp
