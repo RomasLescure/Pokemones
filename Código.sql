@@ -102,7 +102,6 @@ CREATE OR REPLACE FUNCTION best_stat(
     EXCEPTION
         WHEN others THEN
             DBMS_OUTPUT.PUT_LINE('Error desconocido');
-    END;
     END best_stat;
 /
 
@@ -411,12 +410,12 @@ COMMIT;
 CREATE OR REPLACE TRIGGER nuevo_mov
 AFTER INSERT ON movimiento FOR EACH ROW
     DECLARE
-    v_id_pokemon tipo_poke.id_pokemon%type;
-    v_contador number(5);
-    v_contando number(5) := 1;
-    CURSOR c_sea_poke is
-        SELECT id_pokemon FROM tipo_poke
-        WHERE id_tipo = :NEW.id_tipo;
+        v_id_pokemon tipo_poke.id_pokemon%type;
+        v_contador number(5);
+        v_contando number(5) := 1;
+        CURSOR c_sea_poke is
+            SELECT id_pokemon FROM tipo_poke
+            WHERE id_tipo = :NEW.id_tipo;
     BEGIN
         OPEN c_sea_poke;
         SELECT count(id_pokemon) INTO v_contador
@@ -484,7 +483,7 @@ END;
 /
 
 BEGIN 
-    Intro_Poke_tipo2_SE ('Infernape', '178', '1.80', 2, 3, 75, 67, 45, 78, 88, 100);
+    Intro_Poke_tipo2_SE ('Monferno', '120', '0.9', 2, 3, 70, 65, 42, 68, 80, 90);
     Intro_Poke_tipo2_SE ('Lucario', '157', '1.55', 3, 4, 88, 100, 78, 73, 80, 187);
     Intro_Poke_tipo2_SE ('Mawlie', '55', '0.65', 4, 5, 90, 95, 85, 75, 80, 100);
 END;
@@ -495,6 +494,10 @@ BEGIN
 END;
 /
 
+BEGIN
+    Into_Poke_Evo2 ('Infernape', '178', '1.80', 2, 3, 75, 67, 45, 78, 88, 100, 3, 2);
+END;
+/
 -----------------------------------------------------------------------
 --INGRESAR POKEMONES CON ERROR 
 -----------------------------------------------------------------------
@@ -504,7 +507,7 @@ END;
 /
 
 BEGIN
-    Into_Poke_Evo1 ('Alcrimie Gigamax', '200', '30', 1, 68, 94, 85, 42, 100, 650, 1, 1);
+    Into_Poke_Evo1 ('Alcrimie Gigamax', '200', '30', 1, 68, 94, 85, 42, 100, 650, 1, 2);
 END;
 /
 
@@ -551,3 +554,10 @@ CREATE OR REPLACE VIEW poke_tipo AS
     FROM pokedex p, tipo t, tipo_poke tp
     WHERE (p.id_pokemon = tp.id_pokemon) AND (tp.id_tipo = t.id_tipo);
 
+CREATE OR REPLACE VIEW evolucion AS 
+    select p.nombre as pokemon, po.nombre as pokemon_anterior
+    from pokedex p, evolucion_poke ep, pokedex po
+    where (p.id_pokemon = ep.id_pokemon) AND (po.id_pokemon = ep.id_pokemonant);
+--Primer parentesis: Compara el id_pokemon de la tabla pokedes con el id_pokemon de la tabla evolucion_poke
+--Segundo parentesis: Compara el id_pokemon de la tabla pokedex con el id_pokemon_anterior(pokemon del que viene) 
+--de la tabla evolucion_poke 
